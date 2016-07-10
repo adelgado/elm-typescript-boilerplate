@@ -91,7 +91,6 @@ view model =
             [ amplifier model
             , filter model
             ]
-        , instructions
         ]
 
 
@@ -99,66 +98,3 @@ panel : (Msg -> a) -> Model -> Html a
 panel panelMsg model =
     Html.App.map panelMsg
         <| view model
-
-
-instructions : Html a
-instructions =
-    let
-        hotKeys =
-            [ "Z"
-            , "X"
-            , "C"
-            , "V"
-            , "A"
-            , "W"
-            , "S"
-            , "E"
-            , "D"
-            , "F"
-            , "T"
-            , "G"
-            , "Y"
-            , "H"
-            , "U"
-            , "J"
-            , "K"
-            , "O"
-            , "L"
-            , "P"
-            ]
-
-        instructions =
-            [ "octave down", "octave up", "velocity down", "velocity up" ]
-                ++ (List.map ((++) "play ")
-                        [ "C"
-                        , "C#"
-                        , "D"
-                        , "D#"
-                        , "E"
-                        , "F"
-                        , "F#"
-                        , "G"
-                        , "G#"
-                        , "A"
-                        , "A#"
-                        , "B"
-                        , "C 8va"
-                        , "C# 8va"
-                        , "D 8va"
-                        , "D# 8va"
-                        ]
-                   )
-    in
-        div [ class "panel-controls__instructions" ]
-            [ span [ class "instructions__title" ] [ text "INSTRUCTIONS" ]
-            , table [ class "instructions" ]
-                <| List.map2
-                    (\hotkey instruction ->
-                        tr [ class "instructions__entry" ]
-                            [ td [] [ text hotkey ]
-                            , td [ class "instructions__label" ] [ text instruction ]
-                            ]
-                    )
-                    hotKeys
-                    instructions
-            ]
