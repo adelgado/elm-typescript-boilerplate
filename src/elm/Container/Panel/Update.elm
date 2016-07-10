@@ -1,9 +1,6 @@
 module Container.Panel.Update exposing (Msg(..), update)
 
---where
-
 import Container.Panel.Model as Model exposing (Model)
-import Component.Knob as Knob
 import Component.Switch as Switch
 import Component.OptionPicker as OptionPicker
 
@@ -14,7 +11,6 @@ type Msg
     | Osc2KbdTrackToggle Switch.Msg
     | OverdriveToggle Switch.Msg
     | FilterTypeChange OptionPicker.Msg
-    | KnobMsg Knob.Msg
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -26,20 +22,6 @@ update msg model =
             in
                 ( reduxor updatedChildModel model
                 , Cmd.map msg' childCmd
-                )
-
-        updateKnobs : Knob.Msg -> Msg -> ( Model, Cmd Msg )
-        updateKnobs knobMsg msg' =
-            let
-                ( knobs, cmds ) =
-                    List.unzip
-                        <| List.map
-                            --(Knob.update << knobMsg)
-                            (\knob -> Knob.update knobMsg knob)
-                            model.knobs
-            in
-                ( { model | knobs = knobs }
-                , Cmd.map (always msg') <| Cmd.batch cmds
                 )
     in
         case msg of
@@ -78,5 +60,3 @@ update msg model =
                     Model.updateOverdriveSwitch
                     OverdriveToggle
 
-            KnobMsg subMsg ->
-                updateKnobs subMsg (KnobMsg subMsg)

@@ -3,7 +3,6 @@ module Main.Update exposing (Msg(..), update)
 import Container.Panel.Update as PanelUpdate
 import Container.OnScreenKeyboard.Update as KbdUpdate
 import Container.Panel.Update as PanelUpdate
-import Component.Knob as Knob
 import Main.Model as Model
 import Process
 import Task
@@ -14,7 +13,6 @@ import Preset
 type Msg
     = PanelMsg PanelUpdate.Msg
     | OnScreenKeyboardMsg KbdUpdate.Msg
-    | MouseUp
     | OnMidiStateChange Bool
     | NextPreset
     | PreviousPreset
@@ -42,26 +40,6 @@ update msg model =
                     }
             in
                 ( model', Cmd.none )
-
-        MouseUp ->
-            let
-                ( updatedPanel, panelCmd ) =
-                    PanelUpdate.update (PanelUpdate.KnobMsg Knob.MouseUp)
-                        model.panel
-
-                model' =
-                    Model.updatePanel updatedPanel model
-
-                ( updatedKbd, kbdCmd ) =
-                    KbdUpdate.update KbdUpdate.MouseUp model'.onScreenKeyboard
-
-                model'' =
-                    Model.updateOnScreenKeyboard updatedKbd model'
-            in
-                ( model''
-                , Cmd.map (always MouseUp)
-                    <| Cmd.batch [ panelCmd, kbdCmd ]
-                )
 
         PanelMsg subMsg ->
             let

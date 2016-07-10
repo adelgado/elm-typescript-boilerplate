@@ -1,8 +1,5 @@
 module Container.Panel.View exposing (panel)
 
--- where
-
-import Component.Knob as Knob
 import Component.Switch as Switch
 import Component.OptionPicker as OptionPicker
 import Html exposing (Html, div, span, text, table, tr, td)
@@ -15,22 +12,6 @@ import Container.Panel.Update as Update exposing (Msg)
 type Bevel
     = WithBevel
     | WithoutBevel
-
-
-nordKnob : Model -> Knob.KnobInstance -> Html Msg
-nordKnob model knobInstance =
-    let
-        knob =
-            List.head
-                <| List.filter (\knob' -> knob'.idKey == knobInstance)
-                    model.knobs
-    in
-        case knob of
-            Nothing ->
-                Debug.crash "inexistent knob identifier"
-
-            Just knobModel ->
-                Knob.knob Update.KnobMsg knobModel
 
 
 section : Bevel -> String -> List (Html a) -> Html a
@@ -59,35 +40,13 @@ column content =
 amplifier : Model -> Html Msg
 amplifier model =
     section WithoutBevel
-        "amplifier"
-        [ nordKnob model Knob.AmpAttack
-        , nordKnob model Knob.AmpDecay
-        , nordKnob model Knob.AmpSustain
-        , nordKnob model Knob.AmpRelease
-        , nordKnob model Knob.AmpGain
-        ]
+        "amplifier" [ ]
 
 
 filter : Model -> Html Msg
 filter model =
     section WithoutBevel
-        "filter"
-        [ nordKnob model Knob.FilterAttack
-        , nordKnob model Knob.FilterDecay
-        , nordKnob model Knob.FilterSustain
-        , nordKnob model Knob.FilterRelease
-        , OptionPicker.optionPicker "Filter Type"
-            Update.FilterTypeChange
-            model.filterTypeBtn
-        , nordKnob model Knob.FilterCutoff
-          -- frequency
-        , nordKnob model Knob.FilterQ
-          -- resonance
-        , nordKnob model Knob.FilterEnvelopeAmount
-        , Switch.switch "distortion"
-            Update.OverdriveToggle
-            model.overdriveSwitch
-        ]
+        "filter" []
 
 
 osc1 : Model -> Html Msg
@@ -97,19 +56,16 @@ osc1 model =
             Update.Osc1WaveformChange
             model.osc1WaveformBtn
         , span [ class "oscillators__label" ] [ text "OSC 1" ]
-        , nordKnob model Knob.FM
         ]
 
 
 osc2 : Model -> Html Msg
 osc2 model =
     div [ class "oscillators__osc2" ]
-        [ nordKnob model Knob.Osc2Semitone
-        , OptionPicker.optionPicker "Waveform"
+        [ OptionPicker.optionPicker "Waveform"
             Update.Osc2WaveformChange
             model.osc2WaveformBtn
         , span [ class "oscillators__label" ] [ text "OSC 2" ]
-        , nordKnob model Knob.Osc2Detune
         , Switch.switch "kbd track"
             Update.Osc2KbdTrackToggle
             model.osc2KbdTrackSwitch
@@ -123,9 +79,7 @@ oscillatorSection model =
         [ osc1 model
         , osc2 model
         , div [ class "oscillators__extra" ]
-            [ nordKnob model Knob.PW
-            , nordKnob model Knob.OscMix
-            ]
+            []
         ]
 
 

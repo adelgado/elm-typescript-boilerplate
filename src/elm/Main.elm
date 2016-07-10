@@ -3,10 +3,7 @@ module Main exposing (main, subscriptions)
 import Html.App
 import Port
 import Keyboard
-import Mouse
 import Container.OnScreenKeyboard.Update as KbdUpdate
-import Container.Panel.Update as PanelUpdate
-import Component.Knob as Knob
 import Main.Model as Model
 import Main.Update as Update
 import Main.View as View
@@ -35,8 +32,4 @@ subscriptions model =
         , Keyboard.downs
             <| KbdUpdate.handleKeyDown Update.OnScreenKeyboardMsg
                 model.onScreenKeyboard
-        , Mouse.ups <| always Update.MouseUp
-        , Mouse.moves
-            <| \{ y } ->
-                y |> Knob.MouseMove |> PanelUpdate.KnobMsg |> Update.PanelMsg
         ]
