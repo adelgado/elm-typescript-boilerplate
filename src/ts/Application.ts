@@ -2,7 +2,6 @@ import Synth from './AudioEngine/Synth'
 import MIDI from './MIDI'
 import PresetManager from './PresetManager'
 import { FilterState } from './AudioEngine/Filter'
-import { AmplifierState } from './AudioEngine/Amplifier'
 import { OscillatorsState } from './AudioEngine/Oscillators'
 
 const Elm: any = require('../elm/Main.elm')
@@ -18,7 +17,6 @@ interface Preset {
 	name: string
 	presetId: number
 	filter: FilterState
-	amp: AmplifierState
 	oscs: OscillatorsState
 	overdrive: boolean
 }
@@ -87,22 +85,6 @@ export default class Application {
 			.subscribe(() => {
 				this.nextPreset()
 			})
-
-		// AMP
-		this.app.ports.ampVolume
-			.subscribe(this.synth.amplifier.setMasterVolumeGain)
-
-		this.app.ports.ampAttack
-			.subscribe(this.synth.amplifier.adsr.setAttack)
-
-		this.app.ports.ampDecay
-			.subscribe(this.synth.amplifier.adsr.setDecay)
-
-		this.app.ports.ampSustain
-			.subscribe(this.synth.amplifier.adsr.setSustain)
-
-		this.app.ports.ampRelease
-			.subscribe(this.synth.amplifier.adsr.setRelease)
 
 		// OSCILLATORS
 		this.app.ports.oscsMix

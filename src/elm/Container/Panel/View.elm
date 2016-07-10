@@ -37,18 +37,6 @@ column content =
     div [ class "panel-controls__column" ] content
 
 
-amplifier : Model -> Html Msg
-amplifier model =
-    section WithoutBevel
-        "amplifier" [ ]
-
-
-filter : Model -> Html Msg
-filter model =
-    section WithoutBevel
-        "filter" []
-
-
 osc1 : Model -> Html Msg
 osc1 model =
     div [ class "oscillators__osc1" ]
@@ -86,12 +74,7 @@ oscillatorSection model =
 view : Model -> Html Msg
 view model =
     div [ class "panel-controls" ]
-        [ column [ oscillatorSection model ]
-        , column
-            [ amplifier model
-            , filter model
-            ]
-        ]
+        [ column [ oscillatorSection model ] ]
 
 
 panel : (Msg -> a) -> Model -> Html a
