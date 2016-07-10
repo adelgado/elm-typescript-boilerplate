@@ -1,0 +1,56 @@
+{
+  "name": "elm-typescript-boilerplate",
+  "version": "0.0.1",
+  "description": "Boilerplate with working Elm and TypeScript integration",
+  "main": "dist/index.html",
+  "scripts": {
+    "build": "webpack",
+    "build:production": "webpack -p",
+    "dev": "webpack-dev-server --inline --content-base dist/",
+    "elm": "rm -rf elm-stuff/build-artifacts && elm-make src/elm/Main.elm --warn --output=dist/bundle.js",
+    "lint": "eslint src/",
+    "lint:fix": "eslint --fix src/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pablobcb/elm-osiris.git"
+  },
+  "author": "Pablo Botelho",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pablobcb/elm-lead/issues"
+  },
+  "homepage": "https://github.com/pablobcb/elm-lead#readme",
+  "devDependencies": {
+    "autoprefixer": "^6.3.6",
+    "babel-core": "^6.9.0",
+    "babel-eslint": "^6.0.4",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-class-properties": "^6.9.0",
+    "babel-plugin-transform-function-bind": "^6.8.0",
+    "babel-preset-es2015": "^6.9.0",
+    "css-loader": "^0.23.1",
+    "elm-webpack-loader": "^3.0.3",
+    "eslint": "^2.11.0",
+    "eslint-loader": "^1.3.0",
+    "file-loader": "^0.9.0",
+    "json-loader": "^0.5.4",
+    "normalize.css": "^4.1.1",
+    "postcss-loader": "^0.9.1",
+    "source-map-loader": "^0.1.5",
+    "style-loader": "^0.13.1",
+    "stylint": "^1.3.10",
+    "stylint-loader": "^1.0.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^2.1.0",
+    "svg-url-loader": "^1.0.3",
+    "ts-loader": "^0.8.2",
+    "tslint": "^3.13.0",
+    "webpack": "^1.13.1"
+  },
+  "dependencies": {
+    "babel-eslint": "^6.1.0",
+    "webpack-dev-server": "^1.14.1"
+  }
+}

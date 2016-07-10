@@ -1,0 +1,34 @@
+{
+	"env": {
+		"browser": true,
+		"es6": true,
+		"node": true
+	},
+	"parserOptions": {
+		"sourceType": "module"
+	},
+	"plugins": [
+	],
+	"rules": {
+		"brace-style": [ "warn", "1tbs" ],
+		"curly": true,
+		"indent": [ "warn", "tab" ],
+		"keyword-spacing": [ "warn" ],
+		"linebreak-style": [ "warn", "unix" ],
+		"max-len": [ "warn", 80 ],
+		"no-console": [ true ], 
+		"no-debugger": true,
+		"no-mixed-spaces-and-tabs": [ "warn" ],
+		"no-redeclare": [ "warn" ],
+		"no-undef": [ "warn" ],
+		"no-unused-vars": [ "warn" ],
+		"no-var": [ "warn" ],
+		"prefer-const": [ "warn" ],
+		"prefer-template": [ "warn" ],
+		"quotes": [ "warn", "single" ],
+		"semi": [ "warn", "never" ],
+		"space-before-blocks": ["warn", "always"],
+		"space-before-function-paren": [ "warn" ],
+		"space-in-parens": ["warn", "never"]
+	}
+}
