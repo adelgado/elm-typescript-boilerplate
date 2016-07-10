@@ -99,6 +99,7 @@ export default class Application {
 		this.app.ports.fmAmount
 			.subscribe(this.synth.oscillators.oscillator1.setFmAmount)
 
+
 		this.app.ports.pulseWidth
 			.subscribe(this.synth.oscillators.setPulseWidth)
 
