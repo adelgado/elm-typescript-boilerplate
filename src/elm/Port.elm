@@ -1,13 +1,6 @@
 port module Port exposing (..)
 
-import Midi exposing (..)
 import Preset exposing (..)
-
-
-port midiOut : MidiMessage -> Cmd msg
-
-
-port midiIn : (MidiMessage -> msg) -> Sub msg
 
 
 port midiStateChange : (Bool -> msg) -> Sub msg
