@@ -25,7 +25,6 @@ export default class Application {
 	private midiAccess: WebMidi.MIDIAccess
 	private synth: Synth
 	private presetManager: PresetManager<Preset>
-
 	constructor() {
 		const onMIDISuccess = (midiAccess: WebMidi.MIDIAccess) => {
 			this.midiAccess = midiAccess
@@ -92,9 +91,6 @@ export default class Application {
 
 		this.app.ports.osc1Waveform
 			.subscribe(this.synth.oscillators.oscillator1.setWaveform)
-
-		this.app.ports.overdrive
-			.subscribe(this.synth.overdrive.setState)
 
 
 		// MIDI
