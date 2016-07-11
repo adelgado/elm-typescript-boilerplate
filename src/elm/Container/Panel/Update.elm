@@ -1,13 +1,11 @@
 module Container.Panel.Update exposing (Msg(..), update)
 
 import Container.Panel.Model as Model exposing (Model)
-import Component.Switch as Switch
 import Component.OptionPicker as OptionPicker
 
 
 type Msg
     = Osc1WaveformChange OptionPicker.Msg
-    | OverdriveToggle Switch.Msg
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -28,11 +26,3 @@ update msg model =
                     .osc1WaveformBtn
                     Model.updateOsc1WaveformBtn
                     Osc1WaveformChange
-
-            OverdriveToggle subMsg ->
-                updateMap Switch.update
-                    subMsg
-                    .overdriveSwitch
-                    Model.updateOverdriveSwitch
-                    OverdriveToggle
-

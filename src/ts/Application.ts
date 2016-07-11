@@ -1,7 +1,6 @@
 import Synth from './AudioEngine/Synth'
 import MIDI from './MIDI'
 import PresetManager from './PresetManager'
-import { FilterState } from './AudioEngine/Filter'
 import { OscillatorsState } from './AudioEngine/Oscillators'
 
 const Elm: any = require('../elm/Main.elm')
@@ -16,7 +15,6 @@ const noMidiMsg = `Your browser doesnt support WebMIDI API. Use another
 interface Preset {
 	name: string
 	presetId: number
-	filter: FilterState
 	oscs: OscillatorsState
 	overdrive: boolean
 }
@@ -94,31 +92,6 @@ export default class Application {
 
 		this.app.ports.osc1Waveform
 			.subscribe(this.synth.oscillators.oscillator1.setWaveform)
-
-		// FILTER
-		this.app.ports.filterEnvelopeAmount
-			.subscribe(this.synth.filter.setEnvelopeAmount)
-
-		this.app.ports.filterAttack
-			.subscribe(this.synth.filter.adsr.setAttack)
-
-		this.app.ports.filterDecay
-			.subscribe(this.synth.filter.adsr.setDecay)
-
-		this.app.ports.filterSustain
-			.subscribe(this.synth.filter.adsr.setSustain)
-
-		this.app.ports.filterRelease
-			.subscribe(this.synth.filter.adsr.setRelease)
-
-		this.app.ports.filterCutoff
-			.subscribe(this.synth.filter.setCutoff)
-
-		this.app.ports.filterQ
-			.subscribe(this.synth.filter.setQ)
-
-		this.app.ports.filterType
-			.subscribe(this.synth.filter.setType)
 
 		this.app.ports.overdrive
 			.subscribe(this.synth.overdrive.setState)

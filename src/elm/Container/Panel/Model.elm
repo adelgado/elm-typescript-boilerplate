@@ -4,11 +4,9 @@ module Container.Panel.Model
         , Model
         , OscillatorWaveform(..)
         , init
-        , updateOverdriveSwitch
         , updateOsc1WaveformBtn
         )
 
-import Component.Switch as Switch
 import Component.OptionPicker as OptionPicker
 import Port
 import Preset
@@ -73,15 +71,12 @@ createFilterType name =
 
 type alias Model =
     { osc1WaveformBtn : OptionPicker.Model OscillatorWaveform
-    , overdriveSwitch : Switch.Model
     }
 
 
 init : Preset.Preset -> Model
 init preset =
-    { overdriveSwitch =
-        Switch.init preset.overdrive Port.overdrive
-    , osc1WaveformBtn =
+    { osc1WaveformBtn =
         OptionPicker.init Port.osc1Waveform
             (createOscillatorWaveform preset.oscs.osc1.waveformType)
             [ ( "sin", Sine )
@@ -95,8 +90,3 @@ init preset =
 updateOsc1WaveformBtn : OptionPicker.Model OscillatorWaveform -> Model -> Model
 updateOsc1WaveformBtn btn model =
     { model | osc1WaveformBtn = btn }
-
-
-updateOverdriveSwitch : Switch.Model -> Model -> Model
-updateOverdriveSwitch switch model =
-    { model | overdriveSwitch = switch }

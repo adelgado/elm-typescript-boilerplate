@@ -17,52 +17,6 @@ port oscsMix : Int -> Cmd msg
 
 port fmAmount : Int -> Cmd msg
 
-
-port ampVolume : Int -> Cmd msg
-
-
-port ampAttack : Int -> Cmd msg
-
-
-port ampDecay : Int -> Cmd msg
-
-
-port ampSustain : Int -> Cmd msg
-
-
-port ampRelease : Int -> Cmd msg
-
-
-port pulseWidth : Int -> Cmd msg
-
-
-port filterCutoff : Int -> Cmd msg
-
-
-port filterQ : Int -> Cmd msg
-
-
-port filterType : String -> Cmd msg
-
-
-port filterAttack : Int -> Cmd msg
-
-
-port filterDecay : Int -> Cmd msg
-
-
-port filterSustain : Int -> Cmd msg
-
-
-port filterRelease : Int -> Cmd msg
-
-
-port filterEnvelopeAmount : Int -> Cmd msg
-
-
-port overdrive : Bool -> Cmd msg
-
-
 port presetChange : (Preset -> msg) -> Sub msg
 
 
