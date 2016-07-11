@@ -1,8 +1,5 @@
 import MIDI from '../MIDI'
 import CONSTANTS from '../Constants'
-import FMOscillator from './Oscillator/FMOscillator'
-import PulseOscillator from './Oscillator/PulseOscillator'
-import NoiseOscillator from './Oscillator/NoiseOscillator'
 import { BaseOscillator } from './Oscillator/BaseOscillator'
 
 
@@ -34,7 +31,6 @@ export default class Osc1 {
 
 	private kill = (midiNote: number) => {
 		this.fmInputs[midiNote].disconnect()
-		this.vcos[midiNote].disconnect(this.outputs[midiNote])
 		this.vcos[midiNote] = null
 	}
 
@@ -52,7 +48,6 @@ export default class Osc1 {
 		vco.type = this.state.waveformType
 		vco.frequency.value = midiToFreq(midiNote)
 		vco.connect(this.outputs[midiNote])
-		this.fmInputs[midiNote].connect(vco.frequency)
 
 		this.vcos[midiNote] = vco
 
@@ -83,25 +78,9 @@ export default class Osc1 {
 		}
 	}
 
-	public connect = (node: AudioParam) => {
-		for (let i = 0; i < CONSTANTS.MAX_VOICES; i++) {
-			if (this.outputs[i] !== null) {
-				this.outputs[i].connect(node)
-			}
-		}
-	}
-
 	public connectToFm = (nodes: Array<AudioNode>) => {
 		for (let i = 0; i < CONSTANTS.MAX_VOICES; i++) {
 			nodes[i].connect(this.fmInputs[i])
-		}
-	}
-
-	public disconnect = (node: AudioParam) => {
-		for (let i = 0; i < CONSTANTS.MAX_VOICES; i++) {
-			if (this.outputs[i] !== null) {
-				this.outputs[i].disconnect(node)
-			}
 		}
 	}
 

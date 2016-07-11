@@ -1,6 +1,6 @@
 export type WaveformType = string
 
-export abstract class BaseOscillator {
+export class BaseOscillator {
 
 	public output: GainNode
 	public voiceGains: Array<GainNode>
@@ -56,9 +56,7 @@ export abstract class BaseOscillator {
 			delete this.voices[midiNoteKey]
 		}
 
-		this._noteOn(midiNote)
 		this.voices[midiNoteKey].onended = () => {
-			this._onended(this.voices[midiNoteKey])
 			this.voices[midiNoteKey].disconnect()
 			delete this.voices[midiNoteKey]
 		}
@@ -88,21 +86,4 @@ export abstract class BaseOscillator {
 	public setPulseWidth(pw: number): void { }
 	public setWaveform(waveform: string): void { }
 
-	abstract _noteOn(midiNote: number): void
-	protected _onended(voice: number): void { }
-
-
-	setKbdTrack = (state: boolean) => {
-		this.kbdTrack = state
-	}
-
-	connect(node: any) {
-		this.output.connect(node)
-		return this
-	}
-
-	disconnect(node: any) {
-		this.output.disconnect(node)
-		return this
-	}
 }

@@ -25,8 +25,6 @@ export default class Synth {
 
 		this.oscillators = new Oscillators(this.context)
 		this.oscillators.setState(state.oscs)
-
-		this.oscillators.connect(this.filter.input)
 	}
 
 	setState = (state: any) => {
