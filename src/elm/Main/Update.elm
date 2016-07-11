@@ -1,18 +1,14 @@
 module Main.Update exposing (Msg(..), update)
 
 import Container.Panel.Update as PanelUpdate
-import Container.OnScreenKeyboard.Update as KbdUpdate
 import Container.Panel.Update as PanelUpdate
 import Main.Model as Model
-import Process
-import Task
 import Port
 import Preset
 
 
 type Msg
     = PanelMsg PanelUpdate.Msg
-    | OnScreenKeyboardMsg KbdUpdate.Msg
     | OnMidiStateChange Bool
     | NextPreset
     | PreviousPreset
@@ -36,7 +32,6 @@ update msg model =
                 model' =
                     { initModel
                         | midiConnected = model.midiConnected
-                        , onScreenKeyboard = model.onScreenKeyboard
                     }
             in
                 ( model', Cmd.none )
@@ -48,29 +43,6 @@ update msg model =
             in
                 ( Model.updatePanel updatedPanel model
                 , Cmd.map PanelMsg panelCmd
-                )
-
-        OnScreenKeyboardMsg subMsg ->
-            let
-                ( updatedKbd, kbdCmd ) =
-                    KbdUpdate.update subMsg model.onScreenKeyboard
-
-                ( midiMsgInLedOn, blinkOffCmd ) =
-                    case subMsg of
-                        KbdUpdate.MidiMessageIn _ ->
-                            ( True
-                            , Process.sleep (50)
-                                |> Task.perform (always KbdUpdate.NoOp)
-                                    (always KbdUpdate.NoOp)
-                            )
-
-                        _ ->
-                            ( False, Cmd.none )
-            in
-                ( Model.updateOnScreenKeyboard updatedKbd
-                    { model | midiMsgInLedOn = midiMsgInLedOn }
-                , Cmd.map OnScreenKeyboardMsg
-                    <| Cmd.batch [ blinkOffCmd, kbdCmd ]
                 )
 
         OnMidiStateChange state ->

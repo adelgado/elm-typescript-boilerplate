@@ -2,8 +2,6 @@ module Main exposing (main, subscriptions)
 
 import Html.App
 import Port
-import Keyboard
-import Container.OnScreenKeyboard.Update as KbdUpdate
 import Main.Model as Model
 import Main.Update as Update
 import Main.View as View
@@ -24,12 +22,6 @@ main =
 subscriptions : Model.Model -> Sub Update.Msg
 subscriptions model =
     Sub.batch
-        [ Port.midiIn <| Update.OnScreenKeyboardMsg << KbdUpdate.MidiMessageIn
-        , Port.midiStateChange Update.OnMidiStateChange
+        [ Port.midiStateChange Update.OnMidiStateChange
         , Port.presetChange <| Update.PresetChange
-        , Port.panic <| always <| Update.OnScreenKeyboardMsg KbdUpdate.Panic
-        , Keyboard.ups <| KbdUpdate.handleKeyUp Update.OnScreenKeyboardMsg
-        , Keyboard.downs
-            <| KbdUpdate.handleKeyDown Update.OnScreenKeyboardMsg
-                model.onScreenKeyboard
         ]

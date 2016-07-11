@@ -3,11 +3,9 @@ module Main.Model
         ( init
         , Model
         , InitialFlags
-        , updateOnScreenKeyboard
         , updatePanel
         )
 
-import Container.OnScreenKeyboard.Model as KbdModel
 import Container.Panel.Model as PanelModel
 import Preset
 
@@ -19,8 +17,7 @@ type alias InitialFlags =
 
 
 type alias Model =
-    { onScreenKeyboard : KbdModel.Model
-    , panel : PanelModel.Model
+    { panel : PanelModel.Model
     , midiConnected : Bool
     , midiMsgInLedOn : Bool
     , midiSupport : Bool
@@ -31,19 +28,13 @@ type alias Model =
 
 init : Preset.Preset -> Bool -> Model
 init preset midiSupport =
-    { onScreenKeyboard = KbdModel.init
-    , panel = PanelModel.init preset
+    { panel = PanelModel.init preset
     , midiConnected = False
     , midiMsgInLedOn = False
     , midiSupport = midiSupport
     , presetName = preset.name
     , presetId = preset.presetId
     }
-
-
-updateOnScreenKeyboard : KbdModel.Model -> Model -> Model
-updateOnScreenKeyboard keyboard model =
-    { model | onScreenKeyboard = keyboard }
 
 
 updatePanel : PanelModel.Model -> Model -> Model
