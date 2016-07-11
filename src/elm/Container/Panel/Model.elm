@@ -5,9 +5,6 @@ module Container.Panel.Model
         , OscillatorWaveform(..)
         , init
         , updateOverdriveSwitch
-        , updateOsc2KbdTrack
-        , updateFilterTypeBtn
-        , updateOsc2WaveformBtn
         , updateOsc1WaveformBtn
         )
 
@@ -75,28 +72,15 @@ createFilterType name =
 
 
 type alias Model =
-    { filterTypeBtn : OptionPicker.Model FilterType
-    , osc2WaveformBtn : OptionPicker.Model OscillatorWaveform
-    , osc1WaveformBtn : OptionPicker.Model OscillatorWaveform
-    , osc2KbdTrackSwitch : Switch.Model
+    { osc1WaveformBtn : OptionPicker.Model OscillatorWaveform
     , overdriveSwitch : Switch.Model
     }
 
 
 init : Preset.Preset -> Model
 init preset =
-    { osc2KbdTrackSwitch =
-        Switch.init preset.oscs.osc2.kbdTrack Port.osc2KbdTrack
-    , overdriveSwitch =
+    { overdriveSwitch =
         Switch.init preset.overdrive Port.overdrive
-    , filterTypeBtn =
-        OptionPicker.init Port.filterType
-            (createFilterType preset.filter.type_)
-            [ ( "LP", Lowpass )
-            , ( "HP", Highpass )
-            , ( "BP", Bandpass )
-            , ( "notch", Notch )
-            ]
     , osc1WaveformBtn =
         OptionPicker.init Port.osc1Waveform
             (createOscillatorWaveform preset.oscs.osc1.waveformType)
@@ -105,35 +89,12 @@ init preset =
             , ( "saw", Sawtooth )
             , ( "sqr", Square )
             ]
-    , osc2WaveformBtn =
-        OptionPicker.init Port.osc2Waveform
-            (createOscillatorWaveform preset.oscs.osc2.waveformType)
-            [ ( "tri", Triangle )
-            , ( "saw", Sawtooth )
-            , ( "pulse", Pulse )
-            , ( "noise", WhiteNoise )
-            ]
     }
 
 
 updateOsc1WaveformBtn : OptionPicker.Model OscillatorWaveform -> Model -> Model
 updateOsc1WaveformBtn btn model =
     { model | osc1WaveformBtn = btn }
-
-
-updateOsc2WaveformBtn : OptionPicker.Model OscillatorWaveform -> Model -> Model
-updateOsc2WaveformBtn btn model =
-    { model | osc2WaveformBtn = btn }
-
-
-updateOsc2KbdTrack : Switch.Model -> Model -> Model
-updateOsc2KbdTrack switch model =
-    { model | osc2KbdTrackSwitch = switch }
-
-
-updateFilterTypeBtn : OptionPicker.Model FilterType -> Model -> Model
-updateFilterTypeBtn btn model =
-    { model | filterTypeBtn = btn }
 
 
 updateOverdriveSwitch : Switch.Model -> Model -> Model

@@ -7,10 +7,7 @@ import Component.OptionPicker as OptionPicker
 
 type Msg
     = Osc1WaveformChange OptionPicker.Msg
-    | Osc2WaveformChange OptionPicker.Msg
-    | Osc2KbdTrackToggle Switch.Msg
     | OverdriveToggle Switch.Msg
-    | FilterTypeChange OptionPicker.Msg
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -31,27 +28,6 @@ update msg model =
                     .osc1WaveformBtn
                     Model.updateOsc1WaveformBtn
                     Osc1WaveformChange
-
-            Osc2WaveformChange subMsg ->
-                updateMap OptionPicker.update
-                    subMsg
-                    .osc2WaveformBtn
-                    Model.updateOsc2WaveformBtn
-                    Osc2WaveformChange
-
-            FilterTypeChange subMsg ->
-                updateMap OptionPicker.update
-                    subMsg
-                    .filterTypeBtn
-                    Model.updateFilterTypeBtn
-                    FilterTypeChange
-
-            Osc2KbdTrackToggle subMsg ->
-                updateMap Switch.update
-                    subMsg
-                    .osc2KbdTrackSwitch
-                    Model.updateOsc2KbdTrack
-                    Osc2KbdTrackToggle
 
             OverdriveToggle subMsg ->
                 updateMap Switch.update

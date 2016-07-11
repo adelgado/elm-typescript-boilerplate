@@ -90,12 +90,6 @@ export default class Application {
 		this.app.ports.oscsMix
 			.subscribe(this.synth.oscillators.mixer.setState)
 
-		this.app.ports.osc2Semitone
-			.subscribe(this.synth.oscillators.setOscillator2Semitone)
-
-		this.app.ports.osc2Detune
-			.subscribe(this.synth.oscillators.setOscillator2Detune)
-
 		this.app.ports.fmAmount
 			.subscribe(this.synth.oscillators.oscillator1.setFmAmount)
 
@@ -105,12 +99,6 @@ export default class Application {
 
 		this.app.ports.osc1Waveform
 			.subscribe(this.synth.oscillators.oscillator1.setWaveform)
-
-		this.app.ports.osc2Waveform
-			.subscribe(this.synth.oscillators.setOscillator2Waveform)
-
-		this.app.ports.osc2KbdTrack
-			.subscribe(this.synth.oscillators.toggleOsc2KbdTrack)
 
 		// FILTER
 		this.app.ports.filterEnvelopeAmount

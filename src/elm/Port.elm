@@ -19,18 +19,6 @@ port panic : ({} -> msg) -> Sub msg
 port osc1Waveform : String -> Cmd msg
 
 
-port osc2Waveform : String -> Cmd msg
-
-
-port osc2Semitone : Int -> Cmd msg
-
-
-port osc2Detune : Int -> Cmd msg
-
-
-port osc2KbdTrack : Bool -> Cmd msg
-
-
 port oscsMix : Int -> Cmd msg
 
 

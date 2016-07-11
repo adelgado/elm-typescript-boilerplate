@@ -1,6 +1,5 @@
 module Container.Panel.View exposing (panel)
 
-import Component.Switch as Switch
 import Component.OptionPicker as OptionPicker
 import Html exposing (Html, div, span, text, table, tr, td)
 import Html.Attributes exposing (class)
@@ -43,38 +42,14 @@ osc1 model =
         [ OptionPicker.optionPicker "Waveform"
             Update.Osc1WaveformChange
             model.osc1WaveformBtn
-        , span [ class "oscillators__label" ] [ text "OSC 1" ]
-        ]
-
-
-osc2 : Model -> Html Msg
-osc2 model =
-    div [ class "oscillators__osc2" ]
-        [ OptionPicker.optionPicker "Waveform"
-            Update.Osc2WaveformChange
-            model.osc2WaveformBtn
-        , span [ class "oscillators__label" ] [ text "OSC 2" ]
-        , Switch.switch "kbd track"
-            Update.Osc2KbdTrackToggle
-            model.osc2KbdTrackSwitch
-        ]
-
-
-oscillatorSection : Model -> Html Msg
-oscillatorSection model =
-    section WithBevel
-        "oscillators"
-        [ osc1 model
-        , osc2 model
-        , div [ class "oscillators__extra" ]
-            []
         ]
 
 
 view : Model -> Html Msg
 view model =
     div [ class "panel-controls" ]
-        [ column [ oscillatorSection model ] ]
+        [ column
+            [ osc1 model ] ]
 
 
 panel : (Msg -> a) -> Model -> Html a
